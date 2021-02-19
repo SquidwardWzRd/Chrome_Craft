@@ -1,0 +1,11 @@
+{
+  "name": "minecraft_clone",
+  "version": "1.0.0",
+  "description": "A clone of Minecraft",
+  "main": "index.js",
+  "scripts": {
+    "test": "minecraft"
+  },
+  "author": "Garrison Hair",
+  "license": "ISC"
+}
