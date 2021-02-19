@@ -5,22 +5,8 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
-const loader = new THREE.CubeTextureLoader();
-loader.setPath( '/AsepriteSaves/' );
-
-// Texture is loading correctly
-// But the texture is not sticking on the block correctly
-
-const textureCube = loader.load( [
-	'Block.png', 'Block.png',
-	'Block.png', 'Block.png',
-	'Block.png', 'Block.png'
-] );
-
-const material = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: textureCube } );
-const geometry = new THREE.BoxGeometry(1,1,1);
-
-const cube = new THREE.Mesh( geometry, material );
+// Simplifying the cube creation process
+const cube = createCube('/AsepriteSaves/Block.png', (1,1,1));
 scene.add( cube );
 
 camera.position.z = 5;

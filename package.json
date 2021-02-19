@@ -4,7 +4,7 @@
   "description": "A clone of Minecraft",
   "main": "index.js",
   "scripts": {
-    "test": "minecraft"
+    "test": ""
   },
   "author": "Garrison Hair",
   "license": "ISC"

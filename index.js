@@ -49,6 +49,15 @@ http.createServer(function(request, response) {
             response.write(icoFile);
             response.end();
         });
+    }else if(request.url=='/js/cube.js'){
+        fs.readFile('./js/cube.js', function (err, jsFile) {
+             if (err) {
+                  throw err
+             }
+             response.writeHeader(200, {"Content-Type": "text/javascript"});
+             response.write(jsFile);
+             response.end();
+        });
     }
 
 }).listen(PORT);
