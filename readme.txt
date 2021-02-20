@@ -9,7 +9,6 @@ Notes:
 
 To-Do:
     - Set up movement controlls for the camera
-        - Calculate velocity
         - get mouse input
         - etc.
     - 
