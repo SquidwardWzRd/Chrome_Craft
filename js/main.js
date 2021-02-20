@@ -13,10 +13,13 @@ const moveSpeed = 1;
 const MaxSpeed = 5;
 const FRICTION = 0.2;
 
+// Key Pressed Values
 var w = false;
 var a = false;
 var s = false;
 var d = false;
+var alt = false;
+var shift = false;
 
 // Gameloop Value
 var GameRunning = true;
@@ -51,6 +54,12 @@ function Gameloop() {
         if(event.key == 'd') {
             d = true;
         }
+        if(event.key == 'Alt') {
+            alt = true;
+        }
+        if(event.key == 'Shift') {
+            shift = true;
+        }
     });
 
     document.addEventListener('keyup', function(event) {
@@ -66,6 +75,12 @@ function Gameloop() {
         if(event.key == 'd') {
             d = false;
         }
+        if(event.key == 'Alt') {
+            alt = false;
+        }
+        if(event.key == 'Shift') {
+            shift = false;
+        }
     });
 
     if (w == true){
@@ -79,6 +94,12 @@ function Gameloop() {
     }
     if (d == true){
         velocity.x += moveSpeed;
+    }
+    if (alt == true){
+        velocity.y += moveSpeed;
+    }
+    if (shift == true){
+        velocity.y -= moveSpeed;
     }
 
 
@@ -113,10 +134,25 @@ function Gameloop() {
     } else if (velocity.x < 0) {
         velocity.x += FRICTION;
     }
+
+    // Max Speed and Friction for the Y axis
+    if (Math.abs(velocity.y) > MaxSpeed){
+        if (velocity.y > MaxSpeed){
+            velocity.y = MaxSpeed;
+        }else if (velocity.y < -MaxSpeed){
+            velocity.y = -MaxSpeed;
+        } 
+    }
+    if (velocity.y > 0){
+        velocity.y -= FRICTION;
+    } else if (velocity.y < 0) {
+        velocity.y += FRICTION;
+    }
     
     // Adjust the Camera Position based off of Velocity
     camera.translateZ(velocity.z * delta);
     camera.translateX(velocity.x * delta);
+    camera.translateY(velocity.y * delta);
     //console.log(camera.position);
 
 
