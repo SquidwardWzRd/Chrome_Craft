@@ -9,9 +9,14 @@ document.body.appendChild( renderer.domElement );
 
 // GLOBALS
 velocity = new THREE.Vector3(0,0,0);
-const moveSpeed = 1;
-const MaxSpeed = 5;
+const moveSpeed = 5;
+const MaxSpeed = 10;
 const FRICTION = 0.2;
+
+mouse_locked = false;
+var x = 0;
+var y = 0;
+const SENS = 5;
 
 // Key Pressed Values
 var w = false;
@@ -35,6 +40,15 @@ camera.position.z = 5;
 var clock = new THREE.Clock();
 var delta = 0;
 
+  
+function lockChangeAlert() {
+    if(document.pointerLockElement === document.body ||
+    document.mozPointerLockElement === document.body) {
+      mouse_locked = true;
+    } else {
+      mouse_locked = false;
+    }
+}
 
 function Gameloop() {
 
@@ -101,64 +115,50 @@ function Gameloop() {
     if (shift == true){
         velocity.y -= moveSpeed;
     }
+    velocity = calc_velocity(velocity, MaxSpeed);
 
 
-    // Making sure that we arent going over the MAX speed
-    if (Math.abs(velocity.z) > MaxSpeed){
-        if (velocity.z > MaxSpeed){
-            velocity.z = MaxSpeed;
-        }else if (velocity.z < -MaxSpeed){
-            velocity.z = -MaxSpeed;
-        } 
+    // Checking the mouse_locked Value
+    if ("onpointerlockchange" in document) {
+        document.addEventListener('pointerlockchange', lockChangeAlert, false);
+    } else if ("onmozpointerlockchange" in document) {
+        document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
     }
 
-    // Apply Friction on the Z axis
-    if (velocity.z > 0){
-        velocity.z -= FRICTION;
-    } else if (velocity.z < 0) {
-        velocity.z += FRICTION;
-    }
+    // Mouse Input Collection
+    document.addEventListener('mousedown', function(event){
+        if (mouse_locked == false){
+            document.body.requestPointerLock();
+        }
+    });
 
-    // Making sure that we dont pass maxspeed in the X value
-    if (Math.abs(velocity.x) > MaxSpeed){
-        if (velocity.x > MaxSpeed){
-            velocity.x = MaxSpeed;
-        }else if (velocity.x < -MaxSpeed){
-            velocity.x = -MaxSpeed;
-        } 
-    }
+    if (mouse_locked == true){
+        document.addEventListener('mousemove', function(event){
+            x = event.movementX;
+            y = event.movementY;
 
-    // Apply Friction on the X axis
-    if (velocity.x > 0){
-        velocity.x -= FRICTION;
-    } else if (velocity.x < 0) {
-        velocity.x += FRICTION;
+        });
     }
+    x = calc_SENS_x(x,SENS);
+    y = calc_SENS_y(y,SENS);
 
-    // Max Speed and Friction for the Y axis
-    if (Math.abs(velocity.y) > MaxSpeed){
-        if (velocity.y > MaxSpeed){
-            velocity.y = MaxSpeed;
-        }else if (velocity.y < -MaxSpeed){
-            velocity.y = -MaxSpeed;
-        } 
-    }
-    if (velocity.y > 0){
-        velocity.y -= FRICTION;
-    } else if (velocity.y < 0) {
-        velocity.y += FRICTION;
-    }
-    
+
+
     // Adjust the Camera Position based off of Velocity
     camera.translateZ(velocity.z * delta);
     camera.translateX(velocity.x * delta);
     camera.translateY(velocity.y * delta);
-    //console.log(camera.position);
+    velocity.x = 0;
+    velocity.z = 0;
+    velocity.y = 0;
 
-
-    // Rotate the default cube
-    cube.rotation.x += 1 * delta;
-    cube.rotation.y += 1 * delta;
+    camera.rotateY(-1*x * delta);
+    log(camera.rotation.y)
+    camera.rotateX(-1*y * delta);
+    camera.rotateZ(-1*camera.rotation.z)
+    
+    x=0;
+    y=0;
 
 
     // Render the scene and call it a day

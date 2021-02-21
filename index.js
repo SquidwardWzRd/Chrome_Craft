@@ -2,16 +2,8 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 
-/*
-- Favicon not working
-
-
-
-*/
-
 
 const PORT=8080;
-
 http.createServer(function(request, response) {
     if(request.url=='/'){
         fs.readFile('./index.html', function (err, html) {
@@ -58,5 +50,23 @@ http.createServer(function(request, response) {
              response.write(jsFile);
              response.end();
         });
-    } 
+    } else if(request.url=='/js/movement.js'){
+        fs.readFile('./js/movement.js', function (err, jsFile) {
+             if (err) {
+                  throw err
+             }
+             response.writeHeader(200, {"Content-Type": "text/javascript"});
+             response.write(jsFile);
+             response.end();
+        });
+    } else if(request.url=='/js/print.js'){
+        fs.readFile('./js/print.js', function (err, jsFile) {
+             if (err) {
+                  throw err
+             }
+             response.writeHeader(200, {"Content-Type": "text/javascript"});
+             response.write(jsFile);
+             response.end();
+        });
+    }
 }).listen(PORT);
