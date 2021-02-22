@@ -16,6 +16,7 @@ const FRICTION = 0.2;
 mouse_locked = false;
 var x = 0;
 var y = 0;
+var mouse_vel = new THREE.Vector2(0,0);
 const SENS = 5;
 
 // Key Pressed Values
@@ -49,6 +50,8 @@ function lockChangeAlert() {
       mouse_locked = false;
     }
 }
+
+log(camera.rotation);
 
 function Gameloop() {
 
@@ -139,8 +142,11 @@ function Gameloop() {
 
         });
     }
+    // Sensitivity adjustment
     x = calc_SENS_x(x,SENS);
     y = calc_SENS_y(y,SENS);
+
+    
 
 
 
@@ -151,12 +157,10 @@ function Gameloop() {
     velocity.x = 0;
     velocity.z = 0;
     velocity.y = 0;
-
-    
+ 
     camera.rotateY(-1*x * delta);
-    camera.rotateX(-1*y * delta);
-    
-    
+    camera.rotateX(-1*y * delta * Math.cos(-1* camera.rotation.y));
+    camera.rotateZ(-1*y * delta * Math.sin(-1* camera.rotation.z));
     
     x=0;
     y=0;
