@@ -8,4 +8,7 @@ Notes:
     -
 
 To-Do:
-    -
+    - Set up movement controlls for the camera
+        - get mouse input
+        - etc.
+    - 
