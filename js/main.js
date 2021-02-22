@@ -152,10 +152,11 @@ function Gameloop() {
     velocity.z = 0;
     velocity.y = 0;
 
+    
     camera.rotateY(-1*x * delta);
-    log(camera.rotation.y)
     camera.rotateX(-1*y * delta);
-    camera.rotateZ(-1*camera.rotation.z)
+    
+    
     
     x=0;
     y=0;
