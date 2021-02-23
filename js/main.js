@@ -16,7 +16,8 @@ const FRICTION = 0.2;
 mouse_locked = false;
 var x = 0;
 var y = 0;
-var mouse_vel = new THREE.Vector2(0,0);
+const MAX_ANGLE = 2;
+const MIN_ANGLE = -2;
 const SENS = 5;
 
 // Key Pressed Values
@@ -71,7 +72,7 @@ function Gameloop() {
         if(event.key == 'd') {
             d = true;
         }
-        if(event.key == 'Alt') {
+        if(event.key == 'v') {
             alt = true;
         }
         if(event.key == 'Shift') {
@@ -92,7 +93,7 @@ function Gameloop() {
         if(event.key == 'd') {
             d = false;
         }
-        if(event.key == 'Alt') {
+        if(event.key == 'v') {
             alt = false;
         }
         if(event.key == 'Shift') {
@@ -157,10 +158,13 @@ function Gameloop() {
     velocity.x = 0;
     velocity.z = 0;
     velocity.y = 0;
- 
-    camera.rotateY(-1*x * delta);
-    camera.rotateX(-1*y * delta * Math.cos(-1* camera.rotation.y));
-    camera.rotateZ(-1*y * delta * Math.sin(-1* camera.rotation.z));
+    
+    // Rotates LEFT and RIGHT based on world axis
+    camera.rotateOnWorldAxis(new THREE.Vector3(0,1,0), -1*x * delta);
+
+    // Rotates UP and DOWN based on local axis
+    camera.rotateX(-1*y * delta);
+    //camera.rotateZ();
     
     x=0;
     y=0;
