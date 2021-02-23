@@ -1,4 +1,3 @@
-
 // Setting up the THREE.js window
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -32,7 +31,7 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-Generate_World(100, 20);
+Generate_World(10, 20);
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
