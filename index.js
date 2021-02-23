@@ -32,6 +32,15 @@ http.createServer(function(request, response) {
             response.write(pngFile);
             response.end();
         });
+    } else if (request.url=='/AsepriteSaves/Grass.png'){
+        fs.readFile('./AsepriteSaves/Grass.png', function (err, pngFile) {
+            if (err){
+                throw err
+            }
+            response.writeHeader(200, {"Content-Type": "image/png"});
+            response.write(pngFile);
+            response.end();
+        });
     } else if (request.url=='/favicon.ico'){
         fs.readFile('./favicon.ico', function (err, icoFile) {
             if (err){
@@ -61,6 +70,15 @@ http.createServer(function(request, response) {
         });
     } else if(request.url=='/js/print.js'){
         fs.readFile('./js/print.js', function (err, jsFile) {
+             if (err) {
+                  throw err
+             }
+             response.writeHeader(200, {"Content-Type": "text/javascript"});
+             response.write(jsFile);
+             response.end();
+        });
+    } else if(request.url=='/js/World_Generation.js'){
+        fs.readFile('./js/World_Generation.js', function (err, jsFile) {
              if (err) {
                   throw err
              }

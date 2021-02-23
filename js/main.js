@@ -31,9 +31,8 @@ var shift = false;
 // Gameloop Value
 var GameRunning = true;
 
-// Simplifying the cube creation process and creating a default cube
-const cube = createCube('/AsepriteSaves/Block.png', (1,1,1));
-scene.add( cube );
+// GENERATE WORLD
+Generate_World(100, 20);
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
