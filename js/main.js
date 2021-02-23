@@ -1,4 +1,3 @@
-
 // Setting up the THREE.js window
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -31,9 +30,8 @@ var shift = false;
 // Gameloop Value
 var GameRunning = true;
 
-// Simplifying the cube creation process and creating a default cube
-const cube = createCube('/AsepriteSaves/Block.png', (1,1,1));
-scene.add( cube );
+// GENERATE WORLD
+Generate_World(10, 20);
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
