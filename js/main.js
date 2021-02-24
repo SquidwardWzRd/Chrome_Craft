@@ -31,9 +31,10 @@ var shift = false;
 // Gameloop Value
 var GameRunning = true;
 
-// Simplifying the cube creation process and creating a default cube
-const cube = createCube('/AsepriteSaves/Block.png', (1,1,1));
-scene.add( cube );
+// create world
+map = new VoxelWorld(10,10);
+map.create_world(map.size_x, map.size_y);
+
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
