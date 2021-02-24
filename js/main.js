@@ -12,6 +12,8 @@ const moveSpeed = 5;
 const MaxSpeed = 10;
 const FRICTION = 0.2;
 
+var world = [];
+
 mouse_locked = false;
 var x = 0;
 var y = 0;
@@ -32,6 +34,7 @@ var GameRunning = true;
 
 // GENERATE WORLD
 // nothing
+gen_world(world, 50, 50);
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
