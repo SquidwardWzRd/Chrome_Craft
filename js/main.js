@@ -35,6 +35,7 @@ var GameRunning = true;
 // GENERATE WORLD
 // nothing
 gen_world(world, 50, 50);
+console.table(world);
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
