@@ -20,7 +20,7 @@ var x = 0;
 var y = 0;
 const MAX_ANGLE = 2;
 const MIN_ANGLE = -2;
-const SENS = 5;
+const SENS = 4;
 
 // Key Pressed Values
 var w = false;
