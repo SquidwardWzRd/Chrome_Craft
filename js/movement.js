@@ -33,10 +33,8 @@ function calc_velocity(velocity, MaxSpeed){
 function calc_SENS_x(x,SENS){
     if (x>SENS){
         x = SENS;
-    }else if (-1*x < -1*SENS){
+    }else if (x < -1*SENS){
         x = -1*SENS
-    } else if (x == 0){
-        x = 0;
     }
     return x;
 }
@@ -44,10 +42,8 @@ function calc_SENS_x(x,SENS){
 function calc_SENS_y(y, SENS){
     if (y>SENS){
         y = SENS;
-    }else if (-1*y < -1*SENS){
+    }else if (y < -1*SENS){
         y = -1*SENS
-    } else if (y == 0){
-        y = 0;
     }
     return y;
 }
