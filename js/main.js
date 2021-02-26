@@ -13,6 +13,7 @@ const MaxSpeed = 10;
 const FRICTION = 0.2;
 
 var world = [];
+var p = [1,1,1,1,1,1]
 
 mouse_locked = false;
 var x = 0;
@@ -34,6 +35,7 @@ var GameRunning = true;
 
 // GENERATE WORLD
 // nothing
+world.push(createCube(undefined,p));
 gen_world(world, 50, 50);
 console.table(world);
 
