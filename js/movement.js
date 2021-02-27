@@ -1,4 +1,17 @@
 function calc_velocity(velocity, MaxSpeed){
+
+    if (velocity == undefined){
+        throw 'velocity is undefined';
+    }
+    if (MaxSpeed == undefined){
+        throw 'MaxSpeed is undefined';
+    } else if (isNaN(MaxSpeed)){
+        throw 'Max speed is not a number';
+    }
+
+
+
+
     // Making sure that we arent going over the MAX speed
     if (Math.abs(velocity.z) > MaxSpeed){
         if (velocity.z > MaxSpeed){
