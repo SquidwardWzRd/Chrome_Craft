@@ -36,7 +36,7 @@ var GameRunning = true;
 // GENERATE WORLD
 // nothing
 world.push(createCube(undefined,p));
-gen_world(world, 50, 50);
+terrainGen(world, 100, 100);
 console.table(world);
 
 // Setting a defualt camera position with default block in view
