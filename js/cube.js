@@ -8,7 +8,7 @@ function createCube(texture_path, p, x, y){
     } else {
         const texture = new THREE.TextureLoader().load( texture_path );
         // Wireframe
-        material = new THREE.MeshBasicMaterial( { map: texture, wireframe: true} );
+        material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false} );
     }
     // Error Handling
     if (p == undefined){

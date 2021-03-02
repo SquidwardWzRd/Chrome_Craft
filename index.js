@@ -85,16 +85,6 @@ http.createServer(function(request, response) {
                 response.end();
            });
            break;
-        case '/js/World_Generation.js':
-            fs.readFile('./js/World_Generation.js', function (err, jsFile) {
-                if (err) {
-                     throw err
-                }
-                response.writeHeader(200, {"Content-Type": "text/javascript"});
-                response.write(jsFile);
-                response.end();
-           });
-           break;
         case '/js/perlinNoise.js':
             fs.readFile('./js/perlinNoise.js', function (err, jsFile) {
                 if (err) {
