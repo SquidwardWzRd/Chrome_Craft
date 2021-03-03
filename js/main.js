@@ -13,7 +13,7 @@ const MaxSpeed = 10;
 const FRICTION = 0.2;
 
 var world = [];
-var p = [1,1,1,1,1,1]
+var p = [1,1,1,1,1,1];
 
 mouse_locked = false;
 var x = 0;
@@ -34,9 +34,8 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-// nothing
-world.push(createCube(undefined,p));
-terrainGen(world, 10, 5, 10);
+
+terrainGen(world, 10, 5, 10, "pog");
 console.table(world);
 
 // Setting a defualt camera position with default block in view

@@ -1,4 +1,4 @@
-function terrainGen(world, x,y,z) {
+function terrainGen(world, x,y,z, seed) {
 
     // Error Handleing 
     if (world == undefined){
@@ -13,6 +13,10 @@ function terrainGen(world, x,y,z) {
         throw 'X or Y or Z is not a number';
     }
 
+    if (seed == undefined){
+        throw 'Seed is undefined';
+    }
+
 
     let p = [1,1, 1,1, 1,1];
 
@@ -22,26 +26,35 @@ function terrainGen(world, x,y,z) {
                
                 world.push(createCube('/AsepriteSaves/Grass.png',p));
                 scene.add(world[world.length -1]);
+                world[world.length -1].translateX(-1*i);
+                world[world.length -1].translateZ(k);
+                // -h ensures there is more depth to the terrain
+                world[world.length -1].translateY(Math.round(perlinNoise(i,k,seed,10,2,15))-h);  //remove 'pog' with a customizable seed
+
+                
                 for (let j = 0; j<world.length; j++){
-                    if (world[world.length-1].position.y == world[j].position.y){
-                        if (world[world.length-1].position.x - 1 == world[j].position.x){
-                            scene.remove(world[world.length-1]);
-                            world.pop();
-                            p[0] = 0;
-                            p[1] = 0;
-                            world.push(createCube('/AsepriteSaves/Grass.png',p));
-                            scene.add(world[world.length -1]);
+                    for (let t = 0; t<world.length; t++){
+                        if (world[j].position.y == world[world.length-1].position.y && world[t].position.y == world[world.length-1].position.y){
+                            if (world[j].position.x == world[world.length-1].position.x +1 && world[t].position.x == world[world.length-1].position.x -1){
+                                p[0] = 0;
+                                p[1] = 0;
+                            }
+                            if (world[j].position.z == world[world.length-1].position.z +1 && world[t].position.z == world[world.length-1].position.z -1){
+                                p[4] = 0;
+                                p[5] = 0;
+                            }
                         }
                     }
                 }
-               
-
-
-               world[world.length -1].translateX(-1*i);
-               world[world.length -1].translateZ(k);
-               // -h ensures there is more depth to the terrain
-               world[world.length -1].translateY(Math.round(perlinNoise(i,k,"pog",10,2,15))-h);  //remove 'pog' with a customizable seed
-               p = [1,1, 1,1, 1,1];
+                scene.remove(world.pop());
+                
+                world.push(createCube('/AsepriteSaves/Grass.png',p));
+                scene.add(world[world.length -1]);
+                world[world.length -1].translateX(-1*i);
+                world[world.length -1].translateZ(k);
+                // -h ensures there is more depth to the terrain
+                world[world.length -1].translateY(Math.round(perlinNoise(i,k,seed,10,2,15))-h);  //remove 'pog' with a customizable seed
+                p = [1,1, 1,1, 1,1];
             }
        }
     }
