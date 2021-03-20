@@ -8,7 +8,7 @@ function createCube(texture_path, p, x, y){
     } else {
         const texture = new THREE.TextureLoader().load( texture_path );
         // Wireframe
-        material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false} );
+        material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false, side: THREE.DoubleSide} );
     }
     // Error Handling
     if (p == undefined){
@@ -34,7 +34,9 @@ function createCube(texture_path, p, x, y){
     if ( p[4] === 1 ) index.push( 16, 18, 17, 18, 19, 17 );
     if ( p[5] === 1 ) index.push( 20, 22, 21, 22, 23, 21 );
     geometry.setIndex( index );
-    const cube = new THREE.Mesh( geometry, material );
+    const cube = new THREE.InstancedMesh( geometry, material );
+
+    
         
     return cube;
 }

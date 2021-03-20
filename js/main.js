@@ -34,9 +34,9 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-
 terrainGen(world, 10, 5, 10, "pog");
-console.table(world);
+console.log(world);
+log(world[world.length-1].instanceMatrix, 'test');
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
