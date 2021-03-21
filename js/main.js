@@ -20,7 +20,7 @@ var x = 0;
 var y = 0;
 const MAX_ANGLE = 2;
 const MIN_ANGLE = -2;
-const SENS = 4;
+const SENS = 10;
 
 // Key Pressed Values
 var w = false;
@@ -34,9 +34,12 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-terrainGen(world, 10, 5, 10, "pog");
-console.log(world);
-log(world[world.length-1].instanceMatrix, 'test');
+var geom = new THREE.BoxGeometry();
+const texture = new THREE.TextureLoader().load( '/AsepriteSaves/Block.png' );
+var material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false} );
+var cu = new THREE.Mesh(geom, material);
+scene.add(cu);
+terrainGen(world, 20, 5, 20, "pog");
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
