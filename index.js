@@ -2,6 +2,8 @@ var http = require('http');
 var fs = require('fs');
 var path = require('path');
 
+
+// Can still further organize this
 const PORT=8080;
 http.createServer(function(request, response) {
     switch (request.url) {

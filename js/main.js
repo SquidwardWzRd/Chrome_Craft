@@ -40,6 +40,7 @@ var material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false} );
 var cu = new THREE.Mesh(geom, material);
 scene.add(cu);
 terrainGen(world, 20, 5, 20, "pog");
+log(world.length)
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
@@ -57,8 +58,16 @@ function lockChangeAlert() {
       mouse_locked = false;
     }
 }
-
-log(camera.rotation);
+function addLight(...pos) {
+    const color = 0xFFFFFF;
+    const intensity = 1;
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(...pos);
+    scene.add(light);
+}
+   
+addLight(-1, 2, 4);
+addLight(1, 2, -2);
 
 function Gameloop() {
 

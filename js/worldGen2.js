@@ -15,9 +15,6 @@ function terrainGen(world, x,y,z, seed) {
         throw 'Seed is undefined';
     }
 
-
-    let p = [1,1, 1,1, 1,1];
-    
     for (let h = 0; h<y; h++){
         for (let k = 0; k<z; k++){
             for(let i = 0; i<x; i++){
