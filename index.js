@@ -1,6 +1,5 @@
 var http = require('http');
 var fs = require('fs');
-var path = require('path');
 
 
 // Can still further organize this
@@ -14,6 +13,26 @@ http.createServer(function(request, response) {
                 }
                 response.writeHeader(200, {"Content-Type": "text/html"});
                 response.write(html);
+                response.end();
+           });
+           break;
+        case '/node_modules/three/build/three.module.js':
+            fs.readFile('./node_modules/three/build/three.module.js', function (err, jsFile) {
+                if (err) {
+                     throw err
+                }
+                response.writeHeader(200, {"Content-Type": "text/javascript"});
+                response.write(jsFile);
+                response.end();
+           });
+           break;
+        case '/node_modules/three/examples/jsm/libs/stats.module.js':
+            fs.readFile('./node_modules/three/examples/jsm/libs/stats.module.js', function (err, jsFile) {
+                if (err) {
+                     throw err
+                }
+                response.writeHeader(200, {"Content-Type": "text/javascript"});
+                response.write(jsFile);
                 response.end();
            });
            break;

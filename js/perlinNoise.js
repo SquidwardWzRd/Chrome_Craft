@@ -1,4 +1,4 @@
-
+import * as THREE from '/node_modules/three/build/three.module.js';
 
 //Generates a procedurally uniformly distributed unit vector. x,y,seed all seed cash() (PRNG). Multiplies vector by mag
 function randomUnitVector(x,y,seed,mag) {
@@ -13,7 +13,7 @@ function randomUnitVector(x,y,seed,mag) {
 
 
 //
-function perlinNoise(x,y,seed,scale,intensity,range) {
+export function perlinNoise(x,y,seed,scale,intensity,range) {
     if (!range) {range = 255;} //RANGE MUST BE POWER OF 2 - 1! i.e: 3,7,15...63,127...
     if (!intensity) {intensity = 2;} //Intensity of noise. Too high will result in clipping. Gets fed right into randomUnitVector() as mag
     if (!scale) {scale = 10;} //Size of noise cells in coordinate points.
@@ -53,11 +53,11 @@ function perlinNoise(x,y,seed,scale,intensity,range) {
 function cash(x, y, str) {
     var seed = 0; //modified chaos hash to accept strings
     if (typeof str === "string") {
-    	for (i=0; i<str.length; i++) {
+    	for (let i=0; i<str.length; i++) {
       	seed += str.charCodeAt(i)*(i+1);
       }
     } else {seed = str;}
-    h = seed + x*374761393 + y*668265263; //all constants are prime
+    let h = seed + x*374761393 + y*668265263; //all constants are prime
     h = (h^(h >>> 13))*1274126177;
     return h^(h >>> 16);
 }
