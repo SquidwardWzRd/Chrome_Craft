@@ -3,6 +3,7 @@ import {terrainGen} from '/js/worldGen2.js';
 import {calc_velocity, calc_SENS_x, calc_SENS_y} from '/js/movement.js';
 import Stats from '/node_modules/three/examples/jsm/libs/stats.module.js'
 
+
 // Setting up the THREE.js window
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -40,7 +41,7 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-scene.add(terrainGen(20, 5, 20, "pog", undefined /* '/AsepriteSaves/Grass.png' */));
+terrainGen(scene, 20, 5, 20, '/AsepriteSaves/Grass.png' )
 
 // BLENDER CUBE *** IMPORTANT *** *** DO NOT DELETE ***
 var geom = new THREE.BoxGeometry();
@@ -48,8 +49,6 @@ const texture = new THREE.TextureLoader().load( '/AsepriteSaves/Block.png' );
 var material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false} );
 var cu = new THREE.Mesh(geom, material);
 scene.add(cu);
-
-
 
 
 // Setting a defualt camera position with default block in view
@@ -68,16 +67,8 @@ function lockChangeAlert() {
       mouse_locked = false;
     }
 }
-function addLight(...pos) {
-    const color = 0xFFFFFF;
-    const intensity = 1;
-    const light = new THREE.DirectionalLight(color, intensity);
-    light.position.set(...pos);
-    scene.add(light);
-}
-   
-addLight(-1, 2, 4);
-addLight(1, 2, -2);
+
+
 
 function Gameloop() {
 
@@ -128,7 +119,7 @@ function Gameloop() {
         }
         // DEBUG FEATURE
         if(event.key == 'p'){ // Logs draw calls
-            log(renderer.info.render.calls);
+            console.log(renderer.info.render.calls);
         }
     });
 

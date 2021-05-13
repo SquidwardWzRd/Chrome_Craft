@@ -36,6 +36,16 @@ http.createServer(function(request, response) {
                 response.end();
            });
            break;
+        case '/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js':
+            fs.readFile('./node_modules/three/examples/jsm/utils/BufferGeometryUtils.js', function (err, jsFile) {
+                if (err) {
+                     throw err
+                }
+                response.writeHeader(200, {"Content-Type": "text/javascript"});
+                response.write(jsFile);
+                response.end();
+           });
+           break;
         case '/js/main.js':
             fs.readFile('./js/main.js', function (err, jsFile) {
                 if (err) {
