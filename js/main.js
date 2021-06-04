@@ -6,6 +6,7 @@ import Stats from '/node_modules/three/examples/jsm/libs/stats.module.js'
 
 // Setting up the THREE.js window
 const scene = new THREE.Scene();
+scene.background = new THREE.Color("rgb(47, 194, 247)");
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const renderer = new THREE.WebGLRenderer();
