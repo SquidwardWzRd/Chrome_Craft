@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Minecraft</title>
+        <title>Chrome Craft</title>
         <link rel="icon" type="image/ico" href="/favicon.ico"/>
+
+
+        
+        <!-- Global Dependencies -->
+        <script type="module" src="js/print.js" defer></script>
+        <script type="module" src="node_modules/three/build/three.module.js" defer></script>
+        <script type="module" src="node_modules/three/examples/jsm/libs/stats.module.js" defer></script>
+        <script type="module" src="node_modules/three/examples/jsm/utils/BufferGeometryUtils.js" defer></script>
+
+        <!-- Main Dependencies -->
+        <script type="module" src="js/movement.js" defer></script>
+        <script type="module" src="js/perlinNoise.js" defer></script>
+        <script type="module" src="js/worldGen2.js" defer></script>
+
+        <!-- Must be loaded last -->
+        <script type="module" src="js/main.js" defer></script>
+        
     </head>
     <body>
-        <script src="js/print.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r123/three.js"></script>
-        <script src="js/cube.js"></script>
-        <script src="js/movement.js"></script>
-        
-        <!-- Must be loaded last -->
-        <script src="js/main.js"></script>
         
     </body>
 </html>
