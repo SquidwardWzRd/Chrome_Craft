@@ -1,4 +1,17 @@
-function calc_velocity(velocity, MaxSpeed){
+export function calc_velocity(velocity, MaxSpeed){
+
+    if (velocity == undefined){
+        throw 'velocity is undefined';
+    }
+    if (MaxSpeed == undefined){
+        throw 'MaxSpeed is undefined';
+    } else if (isNaN(MaxSpeed)){
+        throw 'Max speed is not a number';
+    }
+
+
+
+
     // Making sure that we arent going over the MAX speed
     if (Math.abs(velocity.z) > MaxSpeed){
         if (velocity.z > MaxSpeed){
@@ -30,7 +43,7 @@ function calc_velocity(velocity, MaxSpeed){
 
 }
 
-function calc_SENS_x(x,SENS){
+export function calc_SENS_x(x,SENS){
     if (x>SENS){
         x = SENS;
     }else if (x < -1*SENS){
@@ -39,7 +52,7 @@ function calc_SENS_x(x,SENS){
     return x;
 }
 
-function calc_SENS_y(y, SENS){
+export function calc_SENS_y(y, SENS){
     if (y>SENS){
         y = SENS;
     }else if (y < -1*SENS){

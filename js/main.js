@@ -1,3 +1,9 @@
+import * as THREE from '/node_modules/three/build/three.module.js';
+import {terrainGen} from '/js/worldGen2.js';
+import {calc_velocity, calc_SENS_x, calc_SENS_y} from '/js/movement.js';
+import Stats from '/node_modules/three/examples/jsm/libs/stats.module.js'
+
+
 // Setting up the THREE.js window
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
@@ -6,21 +12,22 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+var stats = new Stats();
+stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
+document.body.appendChild( stats.dom );
+
 // GLOBALS
-velocity = new THREE.Vector3(0,0,0);
+var velocity = new THREE.Vector3(0,0,0);
 const moveSpeed = 5;
 const MaxSpeed = 10;
 const FRICTION = 0.2;
 
-var world = [];
-var p = [1,1,1,1,1,1]
-
-mouse_locked = false;
+var mouse_locked = false;
 var x = 0;
 var y = 0;
 const MAX_ANGLE = 2;
 const MIN_ANGLE = -2;
-const SENS = 4;
+const SENS = 10;
 
 // Key Pressed Values
 var w = false;
@@ -34,10 +41,15 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-// nothing
-world.push(createCube(undefined,p));
-terrainGen(world, 100, 100);
-console.table(world);
+terrainGen(scene, 20, 5, 20, '/AsepriteSaves/Grass.png' )
+
+// BLENDER CUBE *** IMPORTANT *** *** DO NOT DELETE ***
+var geom = new THREE.BoxGeometry();
+const texture = new THREE.TextureLoader().load( '/AsepriteSaves/Block.png' );
+var material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false} );
+var cu = new THREE.Mesh(geom, material);
+scene.add(cu);
+
 
 // Setting a defualt camera position with default block in view
 camera.position.z = 5;
@@ -56,11 +68,13 @@ function lockChangeAlert() {
     }
 }
 
-log(camera.rotation);
+
 
 function Gameloop() {
 
     delta = clock.getDelta();
+
+    stats.begin();
 
     // Input Collection
     document.addEventListener('keydown', function(event) {
@@ -102,6 +116,10 @@ function Gameloop() {
         }
         if(event.key == 'Shift') {
             shift = false;
+        }
+        // DEBUG FEATURE
+        if(event.key == 'p'){ // Logs draw calls
+            console.log(renderer.info.render.calls);
         }
     });
 
@@ -176,6 +194,9 @@ function Gameloop() {
 
     // Render the scene and call it a day
     renderer.render( scene, camera );
+
+    stats.end();
+
     requestAnimationFrame(Gameloop);
 }
 
