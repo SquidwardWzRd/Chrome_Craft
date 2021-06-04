@@ -18,6 +18,10 @@ export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
         material = new THREE.MeshBasicMaterial( { color: 'white', wireframe: true} );
     } else {
         const texture = new THREE.TextureLoader().load( texture_path );
+        /* texture.wrapS = THREE.RepeatWrapping;
+        texture.wrapT = THREE.RepeatWrapping;
+        texture.repeat.set( 2, 2 ); */
+        texture.anisotropy = 4;
         // Wireframe
         material = new THREE.MeshStandardMaterial( { map: texture, side: THREE.FrontSide} );
     }
