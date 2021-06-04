@@ -19,7 +19,7 @@ export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
     } else {
         const texture = new THREE.TextureLoader().load( texture_path );
         // Wireframe
-        material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false, side: THREE.FrontSide} );
+        material = new THREE.MeshStandardMaterial( { map: texture, side: THREE.FrontSide} );
     }
 
 
@@ -32,6 +32,9 @@ export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
     // Make geometry with all sides
     var geometry = new THREE.BoxGeometry(1,1,1);
     var MESH = new THREE.InstancedMesh( geometry, material, count );
+
+    MESH.castShadow = true;
+    MESH.receiveShadow = true;
     
     var dummy = new THREE.Object3D();
 

@@ -12,6 +12,8 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+renderer.shadowMap.enabled = true;
+
 var stats = new Stats();
 stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild( stats.dom );
@@ -42,17 +44,36 @@ var GameRunning = true;
 
 // GENERATE WORLD
 terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', -1, 1 )
+terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', 1, 1 )
+terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', -1, -1 )
+terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', 1, -1 )
 
 // BLENDER CUBE *** IMPORTANT *** *** DO NOT DELETE ***
 var geom = new THREE.BoxGeometry();
 const texture = new THREE.TextureLoader().load( '/AsepriteSaves/Block.png' );
-var material = new THREE.MeshBasicMaterial( { map: texture, wireframe: false} );
+var material = new THREE.MeshStandardMaterial( { map: texture} );
 var cu = new THREE.Mesh(geom, material);
+cu.translateY(20);
+cu.castShadow = true;
+cu.receiveShadow = true;
 scene.add(cu);
 
 
+const color = 0xFFFFFF;
+const intensity = 1;
+const light = new THREE.DirectionalLight(color, intensity);
+light.position.set(0, 200, 0);
+light.target.position.set(-50, 0, 20);
+light.castShadow = true;
+scene.add(light);
+scene.add(light.target);
+const ambient = new THREE.AmbientLight( 0x404040, 0.5 ); // soft white light
+scene.add( ambient );
+
+
+
 // Setting a defualt camera position with default block in view
-camera.position.z = 5;
+camera.position.y = 20;
 
 // Sets up the Delta Value
 var clock = new THREE.Clock();
