@@ -41,7 +41,7 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-terrainGen(scene, 20, 5, 20, '/AsepriteSaves/Grass.png' )
+terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', -1, 1 )
 
 // BLENDER CUBE *** IMPORTANT *** *** DO NOT DELETE ***
 var geom = new THREE.BoxGeometry();
