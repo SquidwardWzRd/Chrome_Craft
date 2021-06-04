@@ -44,6 +44,17 @@ export function calc_velocity(velocity, MaxSpeed){
 }
 
 export function calc_SENS_x(x,SENS){
+    if (x==undefined){
+        throw 'X is undefined';
+    } else if (isNaN(x)){
+        throw 'The value passed for X isn\'t a number';
+    }
+    if (SENS==undefined){
+        throw 'SENS is undefined';
+    } else if (isNaN(SENS)){
+        throw 'The value passed for SENS isn\'t a number';
+    }
+
     if (x>SENS){
         x = SENS;
     }else if (x < -1*SENS){
@@ -53,6 +64,17 @@ export function calc_SENS_x(x,SENS){
 }
 
 export function calc_SENS_y(y, SENS){
+    if (y==undefined){
+        throw 'Y is undefined';
+    } else if (isNaN(y)){
+        throw 'The value passed for Y isn\'t a number';
+    }
+    if (SENS==undefined){
+        throw 'SENS is undefined';
+    } else if (isNaN(SENS)){
+        throw 'The value passed for SENS isn\'t a number';
+    }
+
     if (y>SENS){
         y = SENS;
     }else if (y < -1*SENS){

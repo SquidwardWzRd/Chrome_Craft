@@ -16,6 +16,29 @@ http.createServer(function(request, response) {
                 response.end();
            });
            break;
+        
+        // EXAMPLE:
+        
+        /* case 'file path for server url':
+            fs.readFile('file path for server url', function (err, type) {
+                if (err) {
+                     throw err
+                }
+                response.writeHeader(200, {"Content-Type": "text/type"});
+                response.write(type);
+                response.end();
+           });
+           break; */
+        case '/favicon-32x32.png':
+            fs.readFile('./favicon-32x32.png', function (err, image) {
+                if (err){
+                    throw err
+                }
+                response.writeHeader(200, {"Content-Type": "image/png"});
+                response.write(image);
+                response.end();
+            });
+            break;
         case '/node_modules/three/build/three.module.js':
             fs.readFile('./node_modules/three/build/three.module.js', function (err, jsFile) {
                 if (err) {
@@ -86,13 +109,13 @@ http.createServer(function(request, response) {
                 response.end();
             });
             break;
-        case '/favicon.ico':
-            fs.readFile('./favicon.ico', function (err, icoFile) {
+        case '/favicon-16x16.png':
+            fs.readFile('./favicon-16x16.png', function (err, image) {
                 if (err){
                     throw err
                 }
-                response.writeHeader(200, {"Content-Type": "image/ico"});
-                response.write(icoFile);
+                response.writeHeader(200, {"Content-Type": "image/png"});
+                response.write(image);
                 response.end();
             });
             break;
@@ -108,16 +131,6 @@ http.createServer(function(request, response) {
            break;
         case '/js/movement.js':
             fs.readFile('./js/movement.js', function (err, jsFile) {
-                if (err) {
-                     throw err
-                }
-                response.writeHeader(200, {"Content-Type": "text/javascript"});
-                response.write(jsFile);
-                response.end();
-           });
-           break;
-        case '/js/print.js':
-            fs.readFile('./js/print.js', function (err, jsFile) {
                 if (err) {
                      throw err
                 }

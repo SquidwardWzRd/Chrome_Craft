@@ -1,3 +1,4 @@
+// IMPORTS
 import * as THREE from '/node_modules/three/build/three.module.js';
 import {terrainGen} from '/js/worldGen2.js';
 import {calc_velocity, calc_SENS_x, calc_SENS_y} from '/js/movement.js';
@@ -7,6 +8,8 @@ import Stats from '/node_modules/three/examples/jsm/libs/stats.module.js'
 // Setting up the THREE.js window
 const scene = new THREE.Scene();
 scene.background = new THREE.Color("rgb(47, 194, 247)");
+
+// Set up the camera
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const renderer = new THREE.WebGLRenderer();
@@ -15,6 +18,7 @@ document.body.appendChild( renderer.domElement );
 
 renderer.shadowMap.enabled = true;
 
+// STATS JS
 var stats = new Stats();
 stats.showPanel( 0 ); // 0: fps, 1: ms, 2: mb, 3+: custom
 document.body.appendChild( stats.dom );
@@ -23,13 +27,11 @@ document.body.appendChild( stats.dom );
 var velocity = new THREE.Vector3(0,0,0);
 const moveSpeed = 5;
 const MaxSpeed = 10;
-const FRICTION = 0.2;
 
+// Camera VARS
 var mouse_locked = false;
 var x = 0;
 var y = 0;
-const MAX_ANGLE = 2;
-const MIN_ANGLE = -2;
 const SENS = 10;
 
 // Key Pressed Values
@@ -60,6 +62,7 @@ cu.receiveShadow = true;
 scene.add(cu);
 
 
+// SCENE LIGHTING
 const color = 0xFFFFFF;
 const intensity = 1;
 const light = new THREE.DirectionalLight(color, intensity);
@@ -79,17 +82,6 @@ camera.position.y = 20;
 // Sets up the Delta Value
 var clock = new THREE.Clock();
 var delta = 0;
-
-  
-function lockChangeAlert() {
-    if(document.pointerLockElement === document.body ||
-    document.mozPointerLockElement === document.body) {
-      mouse_locked = true;
-    } else {
-      mouse_locked = false;
-    }
-}
-
 
 
 function Gameloop() {
@@ -163,33 +155,20 @@ function Gameloop() {
     if (shift == true){
         velocity.y -= moveSpeed;
     }
-    velocity = calc_velocity(velocity, MaxSpeed);
-
-
-    // Checking the mouse_locked Value
-    if ("onpointerlockchange" in document) {
-        document.addEventListener('pointerlockchange', lockChangeAlert, false);
-    } else if ("onmozpointerlockchange" in document) {
-        document.addEventListener('mozpointerlockchange', lockChangeAlert, false);
-    }
+    velocity = calc_velocity(velocity, MaxSpeed); // Calculate movement
 
     // Mouse Input Collection
     document.addEventListener('mousedown', function(event){
-        if (mouse_locked == false){
-            document.body.requestPointerLock();
-        }
+        document.body.requestPointerLock();
     });
 
-    if (mouse_locked == true){
-        document.addEventListener('mousemove', function(event){
-            x = event.movementX;
-            y = event.movementY;
-
-        });
-    }
+    document.addEventListener('mousemove', function(event){
+        x = event.movementX;
+        y = event.movementY;
+    });
     // Sensitivity adjustment
-    x = calc_SENS_x(x,SENS);
-    y = calc_SENS_y(y,SENS);
+    /* x = calc_SENS_x(x,SENS);
+    y = calc_SENS_y(y,SENS); */
 
     
 

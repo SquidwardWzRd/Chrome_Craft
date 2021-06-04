@@ -4,7 +4,7 @@ import {perlinNoise} from '/js/perlinNoise.js';
 
 export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
 
-    // Error Handleing 
+    // Error Handling 
     if (x == undefined || y == undefined || z == undefined){
         throw 'X or Y or Z is undefined';
     } else if  (isNaN(x) || isNaN(y) || isNaN(z)){
@@ -60,24 +60,7 @@ export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
             }
         }
     }
-    
-    /* for(let i=0; i<MESH.count; i++){
-        dummy.position.set(positions[i]);
-        dummy.updateMatrix();
-
-        MESH.setMatrixAt( i, dummy.matrix );
-    } */
 
 
     scene.add(MESH);
 }
-
-/* // Translate it
-dummy.translateX(-1*i);
-dummy.translateZ(k);
-// -h ensures there is more depth to the terrain
-dummy.translateY(Math.round(perlinNoise(i,k,'seed',10,2,15))-h);  //remove 'seed' with a customizable seed
-
-dummy.updateMatrix();
-
-MESH.setMatrixAt( y, dummy.matrix ); */
