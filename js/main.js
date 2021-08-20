@@ -3,7 +3,6 @@ import * as THREE from '/node_modules/three/build/three.module.js';
 import {terrainGen} from '/js/worldGen2.js';
 import {calc_velocity, calc_SENS_x, calc_SENS_y} from '/js/movement.js';
 import Stats from '/node_modules/three/examples/jsm/libs/stats.module.js'
-import { GLTFLoader } from '/node_modules/three/examples/jsm/loaders/GLTFLoader.js';
 
 
 // Setting up the THREE.js window
@@ -62,18 +61,6 @@ cu.castShadow = true;
 cu.receiveShadow = true;
 scene.add(cu);
 
-// ANOTHER TEST MODEL
-const loader = new GLTFLoader();
-
-loader.load( '/AAATOPLISTTESTMODEL.glb', function ( gltf ) {
-
-	scene.add( gltf.scene );
-
-}, undefined, function ( error ) {
-
-	console.error( error );
-
-} );
 
 
 // SCENE LIGHTING
