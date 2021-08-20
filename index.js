@@ -39,16 +39,6 @@ http.createServer(function(request, response) {
                 response.end();
             });
             break;
-        case '/AAATOPLISTTESTMODEL.glb':
-            fs.readFile('./AAATOPLISTTESTMODEL.glb', function (err, image) {
-                if (err){
-                    throw err
-                }
-                response.writeHeader(200, {"Content-Type": "model/gltf-binary"});
-                response.write(image);
-                response.end();
-            });
-            break;
         case '/node_modules/three/build/three.module.js':
             fs.readFile('./node_modules/three/build/three.module.js', function (err, jsFile) {
                 if (err) {
