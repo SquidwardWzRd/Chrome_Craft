@@ -32,6 +32,9 @@ const MaxSpeed = 10;
 var mouse_locked = false;
 var x = 0;
 var y = 0;
+var pitch = 0;
+var yaw = 0;
+var viewVector = new THREE.Vector3(1,0,0);
 const SENS = 10;
 
 // Key Pressed Values
@@ -184,11 +187,13 @@ function Gameloop() {
     velocity.y = 0;
     
     // Rotates LEFT and RIGHT based on world axis
-    camera.rotateOnWorldAxis(new THREE.Vector3(0,1,0), -1*x * delta);
+    pitch += -y*delta;
+    yaw += -x*delta;
+    pitch = Math.max(Math.min(pitch,-0.01),-3.13);
+    console.log(pitch) //remove
+    viewVector.setFromSpherical(new THREE.Spherical(1,pitch,yaw));
 
-    // Rotates UP and DOWN based on local axis
-    camera.rotateX(-1*y * delta);
-    //camera.rotateZ();
+    camera.lookAt(viewVector.add(camera.position));
     
     x=0;
     y=0;
