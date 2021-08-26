@@ -17,7 +17,7 @@ will be run on a public server )
 4. Have Fun!
 
 ### Notes:
-- none
+- IMPORTANT: You will have severe perfermance issues if you do not have hardware acceleration on in chrome settings.
 
 ### To-Do:
 - [Issues](https://github.com/SquidwardWzRd/Chrome_Craft/issues)
