@@ -93,19 +93,19 @@ function Gameloop() {
 
     // Input Collection
     document.addEventListener('keydown', function(event) {
-        if(event.key == 'w') {
+        if(event.key == 'w' || event.key == 'W') {
             w = true;
         } 
-        if(event.key == 's') {
+        if(event.key == 's' || event.key == 'S') {
             s = true;
         }
-        if(event.key == 'a') {
+        if(event.key == 'a' || event.key == 'A') {
             a = true;
         }
-        if(event.key == 'd') {
+        if(event.key == 'd' || event.key == 'D') {
             d = true;
         }
-        if(event.key == 'v') {
+        if(event.key == 'v' || event.key == 'V') {
             alt = true;
         }
         if(event.key == 'Shift') {
@@ -114,19 +114,19 @@ function Gameloop() {
     });
 
     document.addEventListener('keyup', function(event) {
-        if(event.key == 'w') {
+        if(event.key == 'w' || event.key == 'W') {
             w = false;
         } 
-        if(event.key == 's') {
+        if(event.key == 's' || event.key == 'S') {
             s = false;
         }
-        if(event.key == 'a') {
+        if(event.key == 'a' || event.key == 'A') {
             a = false;
         }
-        if(event.key == 'd') {
+        if(event.key == 'd' || event.key == 'D') {
             d = false;
         }
-        if(event.key == 'v') {
+        if(event.key == 'v' || event.key == 'V') {
             alt = false;
         }
         if(event.key == 'Shift') {
