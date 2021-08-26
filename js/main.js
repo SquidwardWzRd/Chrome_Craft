@@ -190,7 +190,6 @@ function Gameloop() {
     pitch += -y*delta;
     yaw += -x*delta;
     pitch = Math.max(Math.min(pitch,-0.01),-3.13);
-    console.log(pitch) //remove
     viewVector.setFromSpherical(new THREE.Spherical(1,pitch,yaw));
 
     camera.lookAt(viewVector.add(camera.position));
