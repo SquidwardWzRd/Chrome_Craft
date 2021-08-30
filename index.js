@@ -159,5 +159,15 @@ http.createServer(function(request, response) {
                 response.end();
            });
            break;
+        case '/js/constructor.js':
+            fs.readFile('./js/constructor.js', function (err, jsFile) {
+                if (err) {
+                     throw err
+                }
+                response.writeHeader(200, {"Content-Type": "text/javascript"});
+                response.write(jsFile);
+                response.end();
+           });
+           break;
     }
 }).listen(PORT);
