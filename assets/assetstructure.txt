@@ -1,0 +1,23 @@
+Subject to change
+
+The assets folder contains 3 subfolders for blocks, entities, and items
+Each separate block, entity, and item should have their own .json file
+
+These json files contain all the data these assets should be created with
+including the textures they use, their names and ids, and any other special
+info they need such as structures to contain inventories or manage health.
+
+Blocks: cubes to be rendered into the world scene or stored in inventories
+Entities: monsters, animals, player, items on ground etc.
+Items: 2d objects to be stored in player inventory
+
+Blocks can be stored in inventories or in the world where they are stored in chunks
+
+Block json files are to have certain properties:
+id: The ID of the block to be referenced in game, should be same as filename (might remove this one if it proves to be useless)
+data: Extra data a block needs such as an inventory for a chest, a script to cook items in a furnace, the direction stairs are facing etc.
+displayName: The text to be displayed on mouseover in the inventory
+miningLevel: The minimum tool strength to recieve drops
+hardness: The time it takes to break this block with a tool of the minimum level to mine it in seconds i.e: stone with hardness 1 takes 1 second to break with wooden pickaxe
+tool: the correct tool to mine this block with
+drops: the items that are to be dropped upon mining this block

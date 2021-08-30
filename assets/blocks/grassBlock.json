@@ -1,0 +1,11 @@
+{
+    "id":"grassBlock",
+    "data":{},
+    "displayName":"Grass Block",
+    "miningLevel":0,
+    "hardness":1,
+    "tool":"shovel",
+    "drops":[
+        "dirtBlock"
+    ]
+}
