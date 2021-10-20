@@ -1,8 +1,10 @@
 import * as THREE from '/node_modules/three/build/three.module.js';
 import {perlinNoise} from '/js/perlinNoise.js';
+import {Block} from '/js/constructor.js';
 
+var fs = require("fs");
 
-export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
+export function terrainGen(x,y,z, texture_path, x_dir, z_dir) {
 
     // Error Handling 
     if (x == undefined || y == undefined || z == undefined){
@@ -54,6 +56,24 @@ export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
 
                 dummy.updateMatrix();
                 MESH.setMatrixAt( t, dummy.matrix );
+
+                // Collect JSON object to JS object
+                let JS_block = JSON.parse(Block);
+                // Make changes if nessecary:
+                // ---
+
+                // Append to chunk data file
+                fs.readFile('./assets/world data/chunk_data.json', 'utf8', function readFileCallback(err, data){
+                    if (err){
+                        console.log(err);
+                    } else {
+                    obj = JSON.parse(data); //now it an object
+                    obj.table.push(JS_block); //add some data
+                    json = JSON.stringify(obj); //convert it back to json
+                    fs.writeFile('./assets/world data/chunk_data.json', json, 'utf8', callback); // write it back 
+                }});
+
+                // Reset Dummy Values
                 dummy.position.set(0,0,0);
                 t++;
                 
@@ -62,5 +82,5 @@ export function terrainGen(scene, x,y,z, texture_path, x_dir, z_dir) {
     }
 
 
-    scene.add(MESH);
+    return {MESH};
 }
