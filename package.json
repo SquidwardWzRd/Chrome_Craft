@@ -9,7 +9,7 @@
   "author": "Garrison Hair",
   "license": "MIT",
   "dependencies": {
-    "three": "^0.128.0"
+    "three": "0.137.0"
   },
   "directories": {
     "doc": "docs"
