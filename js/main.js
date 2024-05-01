@@ -1,6 +1,7 @@
 // IMPORTS
 import * as THREE from '/node_modules/three/build/three.module.js';
-import {terrainGen} from '/js/worldGen2.js';
+import { BufferGeometryUtils } from "/node_modules/three/examples/jsm/utils/BufferGeometryUtils.js";
+import {terrainGen, terrainGen2} from '/js/worldGen2.js';
 import {calc_velocity, calc_SENS_x, calc_SENS_y} from '/js/movement.js';
 import Stats from '/node_modules/three/examples/jsm/libs/stats.module.js'
 
@@ -13,7 +14,7 @@ scene.background = new THREE.Color("rgb(47, 194, 247)");
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 0.1, 1000 );
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize( window.innerWidth, window.innerHeight );
+renderer.setSize( window.innerWidth, window.innerHeight);
 document.body.appendChild( renderer.domElement );
 
 renderer.shadowMap.enabled = true;
@@ -49,10 +50,11 @@ var shift = false;
 var GameRunning = true;
 
 // GENERATE WORLD
-terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', -1, 1 )
-terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', 1, 1 )
-terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', -1, -1 )
-terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', 1, -1 )
+chunk = {x:16, y:10, z:16};
+terrainGen2(scene, 200, 10, 200, '/AsepriteSaves/Grass.png', -1, 1 )
+//terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', 1, 1 )
+//terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', -1, -1 )
+//terrainGen(scene, 100, 10, 100, '/AsepriteSaves/Grass.png', 1, -1 )
 
 // BLENDER CUBE *** IMPORTANT *** *** DO NOT DELETE ***
 var geom = new THREE.BoxGeometry();
@@ -63,6 +65,24 @@ cu.translateY(20);
 cu.castShadow = true;
 cu.receiveShadow = true;
 scene.add(cu);
+
+
+// Merge Testing
+var mat = new THREE.MeshBasicMaterial({
+    color: "white",
+    wireframe: true,
+});
+var geom1 = new THREE.BoxGeometry();
+var geom2 = new THREE.BoxGeometry();
+geom1.translate(20,20,0);
+geom2.translate(19,20,0);
+var geoms = [geom1, geom2];
+var mg = BufferGeometryUtils.mergeBufferGeometries(geoms);
+var mm = new THREE.Mesh(mg, mat);
+//mm.position.set(10,10,0);
+mm.castShadow = true;
+mm.receiveShadow = true;
+scene.add(mm);
 
 
 
